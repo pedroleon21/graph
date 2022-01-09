@@ -1,10 +1,8 @@
 
+#include "lista.h"
+
 #ifndef GRAPH_H
 #define GRAPH_H
-
-#ifndef LISTA_H
-#define LISTA_H
-#endif
 
 #ifndef STDLIB_H
 #define STDLIB_H
@@ -14,6 +12,9 @@
 #define STDIO_H
 #endif
 
+#ifdef LISTA_H
+#define LISTA_H
+#endif
 
 typedef struct Node{
      Lista * lista_adj ;
@@ -21,11 +22,30 @@ typedef struct Node{
      int visitado;
 }Node;
 
+
+typedef struct Tree{
+    struct Node * root;
+}Tree;
+
+Node * new_node(int valor){
+    Node * node = (Node*)malloc(1 * sizeof(Node));
+    return node;
+}
+
+//void add_children_fn(Tree * tree,int valor){
+//    Node no = new_node(valor); 
+//}
+
+Tree * new_tree(){
+    Tree * tree = (Tree*)calloc(1,sizeof(tree));
+    return tree;
+}
+
 Node* push_adj(Node * node, int valor){
     if(node->lista_adj == NULL){
-        node->lista_adj = create_lista();
+        node->lista_adj = criar_lista();
     }
-    node->lista_adj = push_order(node->lista_adj,valor);
+    node->lista_adj->add_order(node->lista_adj,valor);
     return node;
 }
 
